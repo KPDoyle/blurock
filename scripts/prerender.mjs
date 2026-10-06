@@ -4,7 +4,7 @@ import path from 'node:path';
 await build({entryPoints:['src/prerender.jsx'],outfile:'.prerender/render.mjs',bundle:true,format:'esm',platform:'node',packages:'external',jsx:'automatic',logLevel:'silent'});
 const {render,routes}=await import('../.prerender/render.mjs');
 const template=await readFile('dist/index.html','utf8');
-const origin='https://blurock.vercel.app';
+const origin='https://blurock-kevindoyle.vercel.app';
 for(const [route,title,description] of routes){
  const html=template.replace('<div id="root"></div>',`<div id="root">${render(route)}</div>`).replace(/<title>.*?<\/title>/,`<title>${title.replaceAll('&','&amp;')} | BluRock Energy</title>`).replace(/<meta name="description" content="[^"]*">/,`<meta name="description" content="${description.replaceAll('&','&amp;').replaceAll('"','&quot;')}"><link rel="canonical" href="${origin}${route}"><meta property="og:title" content="${title.replaceAll('"','&quot;')} | BluRock Energy"><meta property="og:description" content="${description.replaceAll('"','&quot;')}"><meta property="og:type" content="website"><meta property="og:url" content="${origin}${route}">`);
  const dir=route==='/'?'dist':path.join('dist',route.slice(1));await mkdir(dir,{recursive:true});await writeFile(path.join(dir,'index.html'),html);

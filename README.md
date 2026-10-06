@@ -2,7 +2,7 @@
 
 Duplicate of KPDoyle/nzptechnology at commit 343eb0d7b5b8c7670cddd951bfa7bacee370fcb1, with BluRock Energy branding.
 
-Production: https://blurock.vercel.app
+Production: https://blurock-kevindoyle.vercel.app
 
 ## Development
 
